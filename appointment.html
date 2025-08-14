@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BHC Diamonds Appointment Booking</title>
+    <!-- Use Tailwind CSS via CDN for easy styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7fafc;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen p-4">
+    <div class="max-w-4xl w-full mx-auto bg-white rounded-3xl shadow-xl overflow-hidden p-8 md:p-12">
+        <!-- Header Section -->
+        <header class="text-center mb-10">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-gray-800 leading-tight mb-4">
+                Book Your Exclusive Appointment
+            </h1>
+            <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                Join us at one of our upcoming exhibitions to explore our exquisite collections. Select your preferred date and time below to book your private viewing with BHC Diamonds.
+            </p>
+        </header>
+
+        <!-- Main Content Area -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
+
+            <!-- Bangkok Gems & Jewelry Fair Section -->
+            <div class="bg-blue-50 rounded-2xl p-6 md:p-8 border-2 border-blue-200">
+                <h2 class="text-2xl md:text-3xl font-bold text-blue-900 mb-3">
+                    Bangkok Gems & Jewelry Fair
+                </h2>
+                <p class="text-blue-800 text-base mb-4">
+                    <span class="font-semibold">Dates:</span> 09-13 September 2025
+                </p>
+                <p class="text-blue-800 text-base mb-6">
+                    <span class="font-semibold">Time:</span>
+                    <br>09-12 Sept: 10:00 - 18:00
+                    <br>13 Sept: 10:00 - 17:00
+                </p>
+
+                <div class="space-y-4">
+                    <!-- Date Selector for Bangkok -->
+                    <div>
+                        <label for="bangkok-date" class="block text-blue-900 font-medium mb-2">Select a Date</label>
+                        <select id="bangkok-date" class="w-full p-3 pr-10 border border-blue-300 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors">
+                            <!-- Options will be populated by JavaScript -->
+                        </select>
+                    </div>
+
+                    <!-- Time Selector for Bangkok -->
+                    <div>
+                        <label for="bangkok-time" class="block text-blue-900 font-medium mb-2">Select a Time</label>
+                        <select id="bangkok-time" class="w-full p-3 pr-10 border border-blue-300 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors">
+                            <!-- Options will be populated by JavaScript -->
+                        </select>
+                    </div>
+
+                    <!-- Booking Button for Bangkok -->
+                    <a id="bangkok-booking-link" href="#" class="inline-block w-full text-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
+                        Book Your Bangkok Appointment
+                    </a>
+                </div>
+            </div>
+
+            <!-- Hong Kong Jewellery & Gem WORLD Section -->
+            <div class="bg-yellow-50 rounded-2xl p-6 md:p-8 border-2 border-yellow-200">
+                <h2 class="text-2xl md:text-3xl font-bold text-yellow-900 mb-3">
+                    Jewellery & Gem WORLD Hong Kong
+                </h2>
+                <p class="text-yellow-800 text-base mb-4">
+                    <span class="font-semibold">Dates:</span> 15-19 September 2025
+                </p>
+                <p class="text-yellow-800 text-base mb-6">
+                    <span class="font-semibold">Time:</span>
+                    <br>15-18 Sept: 10:00 - 18:00
+                    <br>19 Sept: 10:00 - 17:00
+                </p>
+
+                <div class="space-y-4">
+                    <!-- Date Selector for Hong Kong -->
+                    <div>
+                        <label for="hk-date" class="block text-yellow-900 font-medium mb-2">Select a Date</label>
+                        <select id="hk-date" class="w-full p-3 pr-10 border border-yellow-300 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-yellow-500 transition-colors">
+                            <!-- Options will be populated by JavaScript -->
+                        </select>
+                    </div>
+
+                    <!-- Time Selector for Hong Kong -->
+                    <div>
+                        <label for="hk-time" class="block text-yellow-900 font-medium mb-2">Select a Time</label>
+                        <select id="hk-time" class="w-full p-3 pr-10 border border-yellow-300 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-yellow-500 transition-colors">
+                            <!-- Options will be populated by JavaScript -->
+                        </select>
+                    </div>
+
+                    <!-- Booking Button for Hong Kong -->
+                    <a id="hk-booking-link" href="#" class="inline-block w-full text-center px-6 py-3 bg-yellow-600 hover:bg-yellow-700 text-white font-bold rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
+                        Book Your Hong Kong Appointment
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+        // JavaScript for handling the dynamic mailto links
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // --- Configuration ---
+            const emailAddress = 'bhcthai@bhcdiamonds.com';
+            const events = {
+                bangkok: {
+                    name: 'Bangkok Gems & Jewelry Fair',
+                    dates: ['09-09-2025', '10-09-2025', '11-09-2025', '12-09-2025', '13-09-2025'],
+                    startHour: 10,
+                    endHourRegular: 18,
+                    endHourLastDay: 17
+                },
+                hongkong: {
+                    name: 'Jewellery & Gem WORLD Hong Kong 2025',
+                    dates: ['15-09-2025', '16-09-2025', '17-09-2025', '18-09-2025', '19-09-2025'],
+                    startHour: 10,
+                    endHourRegular: 18,
+                    endHourLastDay: 17
+                }
+            };
+
+            // --- Helper Functions ---
+            /**
+             * Generates an array of time range strings (e.g., "10:00 to 11:00").
+             * @param {number} startHour The starting hour (e.g., 10).
+             * @param {number} endHour The ending hour (e.g., 18).
+             * @returns {Array<string>} An array of formatted time ranges.
+             */
+            const generateTimeRanges = (startHour, endHour) => {
+                const times = [];
+                for (let i = startHour; i < endHour; i++) {
+                    const nextHour = i + 1;
+                    const start = `${i < 10 ? '0' + i : i}:00`;
+                    const end = `${nextHour < 10 ? '0' + nextHour : nextHour}:00`;
+                    times.push(`${start} to ${end}`);
+                }
+                return times;
+            };
+
+            /**
+             * Populates a select element with options from an array.
+             * @param {HTMLElement} selectElement The <select> element to populate.
+             * @param {Array<string>} optionsArray The array of option values.
+             */
+            const populateSelect = (selectElement, optionsArray) => {
+                selectElement.innerHTML = ''; // Clear existing options
+                optionsArray.forEach(option => {
+                    const optionElement = document.createElement('option');
+                    optionElement.value = option;
+                    optionElement.textContent = option;
+                    selectElement.appendChild(optionElement);
+                });
+            };
+
+            /**
+             * Updates the mailto link based on selected date and time.
+             * @param {string} eventName The name of the event.
+             * @param {HTMLElement} dateSelect The date <select> element.
+             * @param {HTMLElement} timeSelect The time <select> element.
+             * @param {HTMLElement} linkElement The <a> element to update.
+             */
+            const updateMailtoLink = (eventName, dateSelect, timeSelect, linkElement) => {
+                const selectedDate = dateSelect.value;
+                const selectedTime = timeSelect.value;
+                if (selectedDate && selectedTime) {
+                    const subject = encodeURIComponent(`Appointment at ${eventName} on ${selectedDate} from ${selectedTime}`);
+                    const body = encodeURIComponent('I would like to book an appointment. Please confirm my booking.');
+                    linkElement.href = `mailto:${emailAddress}?subject=${subject}&body=${body}`;
+                } else {
+                    linkElement.href = '#'; // Fallback link
+                }
+            };
+
+            // --- Bangkok Fair Logic ---
+            const bangkokDateSelect = document.getElementById('bangkok-date');
+            const bangkokTimeSelect = document.getElementById('bangkok-time');
+            const bangkokLink = document.getElementById('bangkok-booking-link');
+            
+            // Populate Bangkok date selector on load
+            populateSelect(bangkokDateSelect, events.bangkok.dates);
+
+            /**
+             * Dynamically updates the Bangkok time slots based on the selected date.
+             */
+            const updateBangkokTimeSlots = () => {
+                const selectedDate = bangkokDateSelect.value;
+                // Last day of the fair has shorter hours
+                if (selectedDate === '13-09-2025') {
+                    const bangkokLastDayTimes = generateTimeRanges(events.bangkok.startHour, events.bangkok.endHourLastDay);
+                    populateSelect(bangkokTimeSelect, bangkokLastDayTimes);
+                } else {
+                    const bangkokRegularTimes = generateTimeRanges(events.bangkok.startHour, events.bangkok.endHourRegular);
+                    populateSelect(bangkokTimeSelect, bangkokRegularTimes);
+                }
+            };
+
+            // Update link whenever a selection changes
+            const updateBangkokLink = () => {
+                updateMailtoLink(events.bangkok.name, bangkokDateSelect, bangkokTimeSelect, bangkokLink);
+            };
+
+            bangkokDateSelect.addEventListener('change', () => {
+                updateBangkokTimeSlots();
+                updateBangkokLink();
+            });
+            bangkokTimeSelect.addEventListener('change', updateBangkokLink);
+            updateBangkokTimeSlots(); // Initial update on page load
+            updateBangkokLink(); // Initial update on page load
+
+            // --- Hong Kong Fair Logic ---
+            const hkDateSelect = document.getElementById('hk-date');
+            const hkTimeSelect = document.getElementById('hk-time');
+            const hkLink = document.getElementById('hk-booking-link');
+
+            // Generate time ranges for Hong Kong
+            const hkRegularTimes = generateTimeRanges(events.hongkong.startHour, events.hongkong.endHourRegular);
+            const hkLastDayTimes = generateTimeRanges(events.hongkong.startHour, events.hongkong.endHourLastDay);
+
+            // Populate Hong Kong date selector on load
+            populateSelect(hkDateSelect, events.hongkong.dates);
+
+            /**
+             * Dynamically updates the Hong Kong time slots based on the selected date.
+             */
+            const updateHkTimeSlots = () => {
+                const selectedDate = hkDateSelect.value;
+                // Last day of the fair has shorter hours
+                if (selectedDate === '19-09-2025') {
+                    populateSelect(hkTimeSelect, hkLastDayTimes);
+                } else {
+                    populateSelect(hkTimeSelect, hkRegularTimes);
+                }
+            };
+
+            // Update Hong Kong time slots and link whenever a date or time changes
+            const updateHkLink = () => {
+                updateMailtoLink(events.hongkong.name, hkDateSelect, hkTimeSelect, hkLink);
+            };
+
+            hkDateSelect.addEventListener('change', () => {
+                updateHkTimeSlots();
+                updateHkLink();
+            });
+            hkTimeSelect.addEventListener('change', updateHkLink);
+
+            // Initial setup for Hong Kong
+            updateHkTimeSlots();
+            updateHkLink();
+        });
+    </script>
+</body>
+</html>
